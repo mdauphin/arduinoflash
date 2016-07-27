@@ -1,0 +1,34 @@
+CFLAGS=/D WIN32NATIVE
+all: arduino.obj ser_win32.obj stk500.obj main.obj lists.obj avrpart.obj avr.obj pindefs.obj safemode.obj
+	cl arduino.obj ser_win32.obj stk500.obj main.obj lists.obj avrpart.obj avr.obj pindefs.obj safemode.obj user32.lib Ws2_32.lib /link /out:main.exe
+
+arduino.obj: arduino.c
+	cl /c $(CFLAGS) arduino.c
+	
+ser_win32.obj: ser_win32.c
+	cl /c $(CFLAGS) ser_win32.c
+	
+stk500.obj : stk500.c
+	cl /c $(CFLAGS) stk500.c
+
+main.obj : main.c
+	cl /c $(CFLAGS) main.c
+	
+lists.obj : lists.c
+	cl /c $(CFLAGS) lists.c
+
+avrpart.obj : avrpart.c
+	cl /c $(CFLAGS) avrpart.c
+
+avr.obj : avr.c
+	cl /c $(CFLAGS) avr.c
+	
+pindefs.obj : pindefs.c
+	cl /c $(CFLAGS) pindefs.c
+
+safemode.obj : safemode.c
+	cl /c $(CFLAGS) safemode.c	
+	
+	
+clean:
+	del *.obj *.exe
